@@ -13,6 +13,11 @@ body {
   padding: 0;
 }
 
+body.dark-mode {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
 .painthead-main {
   width: 100%;
   min-height: 100vh;
@@ -22,28 +27,52 @@ body {
   text-align: center;
   padding: 2rem;
   font-size: 14px;
-  color: #333;
-  position: sticky;
-  top: 0;
-  background: white;
-  z-index: 100;
+  color: var(--foreground);
+}
+
+#title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--foreground);
+  margin: 0;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+.dark-mode-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--foreground);
+  color: var(--background);
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  z-index: 200;
+  transition: all 0.2s;
+}
+
+.dark-mode-toggle:hover {
+  opacity: 0.8;
 }
 
 .start-button {
   display: block;
   margin: 1rem auto 0;
-  padding: 0.75rem 1.5rem;
-  background: #333;
-  color: white;
+  padding: 0.25rem 0.5rem;
+  background: var(--foreground);
+  color: var(--background);
   border: none;
-  border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
   transition: background 0.2s;
+  font-style: italic;
 }
 
 .start-button:hover {
-  background: #555;
+  opacity: 0.8;
 }
 
 #paintContent {
@@ -68,7 +97,8 @@ body {
   text-align: center;
   padding: 2rem;
   font-size: 12px;
-  color: #666;
+  color: var(--foreground);
+  opacity: 0.6;
   margin-top: 2rem;
 }
 

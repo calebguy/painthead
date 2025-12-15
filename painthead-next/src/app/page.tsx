@@ -1,7 +1,8 @@
 'use client';
 
+import { AudioProvider, useAudio } from '@/context/AudioContext';
 import dynamic from 'next/dynamic';
-import { useAudio, AudioProvider } from '@/context/AudioContext';
+import { useEffect, useState } from 'react';
 
 // Dynamically import all sketches with no SSR (p5.js requires window)
 const PH1 = dynamic(() => import('@/components/sketches/PH1'), { ssr: false });
@@ -24,9 +25,29 @@ const PH17 = dynamic(() => import('@/components/sketches/PH17'), { ssr: false })
 
 function PaintheadContent() {
   const { isListening, startListening } = useAudio();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('darkMode');
+    if (saved === 'true') {
+      setIsDarkMode(true);
+      document.body.classList.add('dark-mode');
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    const newValue = !isDarkMode;
+    setIsDarkMode(newValue);
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', String(newValue));
+  };
 
   return (
     <main className="painthead-main">
+      <button onClick={toggleDarkMode} className="dark-mode-toggle">
+        {isDarkMode ? 'light' : 'dark'}
+      </button>
+      <h1 id="title">painthead</h1>
       <div id="paintInfo">
         view by yourself<br />
         scream until one word is left

@@ -38,7 +38,8 @@ export default function PH1() {
       p.draw = () => {
         const d = dimsRef.current;
         const { micLevel, vol } = audioRef.current;
-        p.background(255);
+        const isDark = document.body.classList.contains('dark-mode');
+        p.background(isDark ? 0 : 255);
         p.image(
           img,
           d.imgMainPosX + micLevel * 2000 * vol,
